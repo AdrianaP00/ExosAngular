@@ -1,0 +1,43 @@
+<h1>Calculator</h1>
+
+<div class="input-fields">
+  <input (change)="setFirstNumber($event)" type="number" placeholder="First number">
+  <select (change)="setOperation($event)">
+    <option value="+">Add</option>
+    <option value="-">Subtract</option>
+    <option value="*">Multiply</option>
+    <option value="/">Divide</option>
+  </select>
+  <input (change)="setSecondNumber($event)" type="number" placeholder="Second number">
+</div>
+
+<button (click)="calculate()">Calculate</button>
+
+<div class="result">
+  <p>Result: {{ result }}</p>
+</div>
+
+<table class="history-table">
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>First Element</th>
+      <th>Operation</th>
+      <th>Second Element</th>
+      <th>Result</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of history; track item.timestamp) {
+      <tr>
+        <td>{{ item.timestamp }}</td>
+        <td>{{ item.firstNumber }}</td>
+        <td>{{ item.operation }}</td>
+        <td>{{ item.secondNumber }}</td>
+        <td>{{ item.result }}</td>
+        <td (click)="deleteItem(item)">Delete</td>
+      </tr>
+    }
+  </tbody>
+</table>
